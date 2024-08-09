@@ -3,6 +3,8 @@
 const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const { Command } = require("commander");
+const program = new Command();
 
 function checkIfGitRepo() {
   // Check if the current directory contains a .git directory
@@ -53,8 +55,14 @@ function generateLogReport(author, date) {
   });
 }
 
-// Example Usage
-const author = process.argv[2] || "Mark Wayne Menorca";
-const date = process.argv[3] || "2024-08-08";
+// Define command-line options using commander
+program
+  .version("1.0.0")
+  .description("Generate a log report from Git log.")
+  .requiredOption("--author <author>", "Specify the author")
+  .requiredOption("--date <date>", "Specify the date in YYYY-MM-DD format")
+  .parse(process.argv);
 
-generateLogReport(author, date);
+const options = program.opts();
+
+generateLogReport(options.author, options.date);

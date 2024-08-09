@@ -10,6 +10,9 @@
   "license": "ISC",
   "description": "A command-line tool that generates a report from git log.",
   "bin": {
-    "report-gen": "index.js"
+    "report-gen": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^12.1.0"
   }
 }
